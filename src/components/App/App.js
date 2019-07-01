@@ -1,11 +1,16 @@
 import React from 'react';
+
+// CSS
 import './App.scss';
+
+// Components
+import Form from '../Form/Form';
 
 function App() {
 	return (
 		<div className='app'>
-			This is the most used word app.
-    </div>
+			<Form />
+		</div>
 	);
 }
 
