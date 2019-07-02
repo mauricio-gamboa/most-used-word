@@ -20,7 +20,7 @@ function Words(props) {
 
     return (
         <div className='words'>
-            <h2>{`The following word${wordsWithSameCount === 1 ? ' is' : "'s are"} the most used:`}</h2>
+            <h2>{`The following word${wordsWithSameCount === 1 ? ' is' : 's are'} the most used:`}</h2>
             <ul>
                 {Object.keys(props.counterObj).map((word, index) => {
                     return (

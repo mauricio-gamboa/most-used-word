@@ -19,9 +19,9 @@ function Form(props) {
         }
 
         setIsLoading(true);
-        const video = await getSentences(number);
+        const sentences = await getSentences(number);
         setIsLoading(false);
-        props.callback(video);
+        props.callback(sentences);
     };
 
     const hasErrors = () => {
