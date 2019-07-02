@@ -25,7 +25,11 @@ function getCount(arr) {
 }
 
 function getCleanArray(string) {
-    const cleanText = string.replace(/,/g, ' ').replace(/\./g, '');
+    const cleanText = string
+        .replace(/,/g, ' ')
+        .replace(/\./g, '')
+        .trim();
+
     return cleanText.split(' ');
 }
 
