@@ -9,6 +9,7 @@ import getSentences from '../../services/api';
 function Form(props) {
     const [number, setNumber] = useState('');
     const [errors, setErros] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleSubmit = async event => {
         event.preventDefault();
@@ -17,7 +18,9 @@ function Form(props) {
             return;
         }
 
+        setIsLoading(true);
         const video = await getSentences(number);
+        setIsLoading(false);
         props.callback(video);
     };
 
@@ -32,6 +35,14 @@ function Form(props) {
             liveErrors.push('Enter a valid numer.');
         }
 
+        if (number && number <= 0) {
+            liveErrors.push('Number must be greater than zero.');
+        }
+
+        if (number && number > 10) {
+            liveErrors.push('Number must be 10 or less.');
+        }
+
         setErros(liveErrors);
 
         return liveErrors.length > 0;
@@ -42,20 +53,28 @@ function Form(props) {
             className='form'
             onSubmit={event => handleSubmit(event)}>
             <div className='row'>
-                <div className='col'>
-                    <input
-                        className='input'
-                        type='text'
-                        name='number'
-                        value={number}
-                        onChange={event => setNumber(event.target.value)}
-                        placeholder='Number' />
-                </div>
-                <div className='col'>
-                    <button className='button' type='submit'>
-                        Get sentences!
-                    </button>
-                </div>
+                <input
+                    className='input'
+                    type='text'
+                    name='number'
+                    value={number}
+                    onChange={event => setNumber(event.target.value)}
+                    placeholder='Number' />
+            </div>
+            <div className='row'>
+                <button className='button' type='submit' disabled={`${isLoading ? 'disable' : ''}`}>
+                    {`${isLoading ? 'Loading sentences' : 'Get sentences!'}`}
+
+                    {' '}
+
+                    {!isLoading &&
+                        <i className='far fa-file-alt' />
+                    }
+
+                    {isLoading &&
+                        <i className='fas fa-spinner fa-spin' />
+                    }
+                </button>
             </div>
             {errors.length > 0 &&
                 <div className='errors'>
