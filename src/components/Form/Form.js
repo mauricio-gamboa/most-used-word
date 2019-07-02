@@ -1,18 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 // CSS
 import './Form.scss';
 
-function Form() {
+// Services
+import getSentences from '../../services/api';
+
+function Form(props) {
     const [number, setNumber] = useState('');
     const [errors, setErros] = useState([]);
 
-    const handleSubmit = event => {
+    const handleSubmit = async event => {
         event.preventDefault();
 
         if (hasErrors()) {
             return;
         }
+
+        const video = await getSentences(number);
+        props.callback(video);
     };
 
     const hasErrors = () => {
@@ -40,7 +46,7 @@ function Form() {
                     <input
                         className='input'
                         type='text'
-                        name='title'
+                        name='number'
                         value={number}
                         onChange={event => setNumber(event.target.value)}
                         placeholder='Number' />
