@@ -8,9 +8,15 @@ function Words(props) {
     const [count, setCount] = useState(0);
 
     useEffect(() => {
-        setCount(Object.values(props.counterObj)[0] || {});
-        setWordsWithSameCount(Object.keys(props.counterObj).length);
+        if (props.counterObj) {
+            setCount(Object.values(props.counterObj)[0] || {});
+            setWordsWithSameCount(Object.keys(props.counterObj).length);
+        }
     }, [props.counterObj]);
+
+    if (!props.counterObj) {
+        return null;
+    }
 
     return (
         <div className='words'>

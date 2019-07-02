@@ -33,7 +33,10 @@ function App() {
 			<Form callback={setSentences} />
 
 			{sentences && sentences.text &&
-				<div className='sentences'>{sentences.text}</div>
+				<div className='sentences'>
+					<h2>Sentences:</h2>
+					<div>{sentences.text}</div>
+				</div>
 			}
 
 			{hasResults &&
